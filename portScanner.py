@@ -2,6 +2,11 @@
 
 import socket
 
+# Define a dictionary of common ports and their services
+commonPorts = {20:"FTP", 21:"FTP", 22:"SSH", 23:"Telnet", 25:"SMTP", 53:"DNS", 80:"HTTP", 110:"POP3", 443:"HTTPS", 3306:"MySQL", 8080:"HTTP Proxy", 8443:"HTTPS"}
+ports = list(commonPorts.keys())
+
+
 def scan(t, p):
     try:
         sock = socket.socket()
@@ -17,7 +22,8 @@ def scan(t, p):
 target = input("[+] Enter target website in format 'www.example.com': ")
 targetIp = socket.gethostbyname(target)
 
-for port in range(1, 100):
+for port in ports:
     scan(targetIp, port)
 
 print("Scan complete!")
+
