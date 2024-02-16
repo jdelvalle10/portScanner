@@ -1,11 +1,5 @@
 import socket
 
-commonPorts = {
-    20: "FTP", 21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS",
-    80: "HTTP", 110: "POP3", 443: "HTTPS", 3306: "MySQL", 8080: "HTTP Proxy", 8443: "HTTPS"
-}
-ports = list(commonPorts.keys())
-
 
 def port_scan(target):
     try:
@@ -16,15 +10,25 @@ def port_scan(target):
 
     open_ports = []
 
-    for port in ports:
+    for port in range(1, 100):
         try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(2)
+            sock = socket.socket()
+            sock.settimeout(0.5)
             result = sock.connect_ex((target_ip, port))
             if result == 0:
                 open_ports.append(port)
                 sock.close()
         except socket.error:
             pass
-
     return open_ports
+
+
+def banner_grabber(ip, port):
+    try:
+        socket.setdefaulttimeout(2)
+        s = socket.socket()
+        s.connect((ip, port))
+        banner = s.recv(4096)
+        return banner
+    except:
+        return
