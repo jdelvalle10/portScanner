@@ -45,7 +45,3 @@ with open('vulnerablePorts.csv', 'w') as f:
 # nm.all_protocols() -> returns a list of all the protocols that were scanned.
 # nm[host] -> returns a dictionary with the scan results of the specified host.
 # nm.csv() -> returns a string with the scan results in csv format.
-
-# Now that we know the ports that are open, we can use the nmap library to find out if they are vulnerable.
-# We can use the nmap library to scan for vulnerabilities in the open ports.
-# This is an example of how to use the nmap library to scan for vulnerabilities in the open ports.
